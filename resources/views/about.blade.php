@@ -8,5 +8,9 @@
 </head>
 <body>
     This is about
+    <br>
+    name : {{$name}}
+    <br>
+    age: {{$age}}
 </body>
 </html>
