@@ -73,8 +73,9 @@
 
 <footer></footer> --}}
 
+@props(['bodyClass' => '', 'title' => ''])
 
-<x-base-layout title="Home">
+<x-base-layout :title="$title">
     @include('layouts.partials.header')
     {{$slot}}
     <footer>

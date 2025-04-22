@@ -1,4 +1,4 @@
-<x-app-layout title="Home" >
+<x-app-layout title="Home">
     <!-- Home Slider -->
     <section class="hero-slider">
         <!-- Carousel wrapper -->
@@ -67,4 +67,24 @@
         </div>
     </section>
     <!--/ Home Slider -->
+
+
+    <!-- Find a car form -->
+    <x-search-form />
+    <!--/ Find a car form -->
+
+    <!-- New Cars -->
+    <section>
+        <div class="container">
+            <h2>Latest Added Cars</h2>
+            <div class="car-items-listing">
+                @for ($i = 0; $i < 15; $i++)
+                    <x-car-item />
+                @endfor
+            </div>
+        </div>
+    </section>
+    <!--/ New Cars -->
+
+
 </x-app-layout>
