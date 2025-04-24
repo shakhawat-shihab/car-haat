@@ -3,71 +3,51 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
+use App\Models\CarImage;
+use App\Models\CarType;
 use App\Models\FuelType;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        //select all cars
-        // $cars = Car::get();
-        // dump($cars);
 
 
-        // get published cars
-        // $cars = Car::where('published_at', '!=', null)->orderBy('published_at', 'desc')
-        //     ->limit(10)
-        //     ->get();
-        // dump($cars);
 
-        //get first car
-        // $car = Car::where('published_at', '!=', null)->first();
+        // $car = Car::find(1);
+        // dump($car->features);
+        // dump($car->primaryImage);
+        // dump($car->images);
+
+        // add images to car
+        // $car = Car::find(1);
+        // $newImage=new CarImage([
+        //     'image_path'=>'image.jpg',
+        //     'position'=>1,
+        // ]);
+        // $car->images()->save($newImage);
+
         // dump($car);
+        // dump($car->carType);
 
-        // create car data
-        // Car::create([
-        //     'name' => 'Car 1',
-        //     'description' => 'Car 1 description',
-        //     'published_at' => now(),
-        // ]);
-
-        //create car using save method
-        // $car = new Car();
-        // $car->name = 'Car 2';
-        // $car->description = 'Car 2 description';
-        // $car->published_at = now();
-        // $car->save();
-
-        //create car using save method
-        // $car = new Car();
-        // $car->fill($carData)
-        // $car->save();
-
-        //create car using save method
-        // $car = new Car($carData);
-        // $car->save();
-
-        // update car data
-        // $car = Car::find(2);
-        // $car->price = 180000;
-        // $car->save();
-
-        // if filter logic is satisfied, then update otherwise create
-        // Car::updateOrCreate([
-        //     'id' => 2,
-        // ], [
-        //     'name' => 'Car 3',
-        //     'description' => 'Car 3 description',
-        // ]);
+        // $carType = CarType::where("name", "Sedan")->first();
+        // dump($carType->cars);
+        // $cars = Car::whereBelongsTo($carType)->get();
 
 
-        // delete car
-        // $car = Car::find(2);
-        // $car->delete();
+        // $car = Car::find(1);
+        // dump($car->favoredUsers);
 
-        //delete multiple
-        // Car::destroy([1,2,3]);
+
+        // $user=User::find(1);
+        // dump($user->favoriteCars);
+
+        // $user=User::find(1);
+        // $user->favoriteCars()->attach([1,2]);
+
+
 
 
         return view('index');

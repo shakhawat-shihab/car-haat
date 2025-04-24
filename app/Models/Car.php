@@ -4,6 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Car extends Model
@@ -30,12 +34,31 @@ class Car extends Model
         'color'
     ];
 
-    // which columns are not fillable
-    protected $guarded = [
-        'id',
-        'created_at',
-        'updated_at'
-    ];
+    public function features(): HasOne
+    {
+        return $this->hasOne(CarFeatures::class, 'car_id', 'id');
+    }
+
+    public function primaryImage(): HasOne
+    {
+        return $this->hasOne(CarImage::class, 'car_id', 'id')->oldestOfMany('position');
+    }
+
+    public function images(): HasMany
+    {
+        return $this->hasMany(CarImage::class, 'car_id', 'id');
+    }
+
+    public function carType(): BelongsTo
+    {
+        return $this->belongsTo(CarType::class, 'car_type_id', 'id');
+    }
+
+
+    public function favoriteUsers(): BelongsToMany{
+        return $this->belongsToMany(User::class, "favourite_cars", "car_id", "user_id");
+    }
+
 
 }
 
