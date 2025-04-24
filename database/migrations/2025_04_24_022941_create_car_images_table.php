@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('image_path');
             $table->integer('position');
             $table->foreignId('car_id')->constrained('cars');
-            $table->timestamps();
         });
     }
 

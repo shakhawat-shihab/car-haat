@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('car_id')->constrained('cars');
             $table->foreignId('user_id')->constrained('users');
-            $table->timestamps();
         });
     }
 

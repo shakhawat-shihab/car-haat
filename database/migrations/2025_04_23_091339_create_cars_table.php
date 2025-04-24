@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->longText("description")->nullable();
             $table->timestamp("published_at")->nullable();
             $table->timestamp("deleted_at")->nullable();
-            $table->foreignId('marker_id')->constrained('makes');
+            $table->foreignId('maker_id')->constrained('makers');
             $table->foreignId('model_id')->constrained('models');
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId("car_type_id")->constrained("car_types");
