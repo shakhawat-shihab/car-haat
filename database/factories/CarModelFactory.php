@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Maker;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,6 +19,7 @@ class CarModelFactory extends Factory
     {
         return [
             "name" => fake()->word(),
+            'maker_id' => Maker::factory()
         ];
     }
 }

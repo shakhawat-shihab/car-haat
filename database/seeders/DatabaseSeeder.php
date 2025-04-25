@@ -86,12 +86,14 @@ class DatabaseSeeder extends Seeder
                 ->has(
                     CarModel::factory()
                         ->count(count($models))
-                        ->sequence(...array_map(fn($model) => ['name' => $model], $models))
+                        ->sequence(...array_map(fn($model) => ['name' => $model], $models)),
+                        // ->afterCreating(function (CarModel $m) {
+                        //     dump($m->name);
+                        // }),
+                    "carModels"
                 )
                 ->create();
         }
-
-
 
         User::factory()
             ->count(3)
