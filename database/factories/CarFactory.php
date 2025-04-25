@@ -2,11 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\CarModel;
 use App\Models\CarType;
 use App\Models\City;
 use App\Models\FuelType;
 use App\Models\Maker;
-use App\Models\Model;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -25,7 +25,7 @@ class CarFactory extends Factory
         return [
             "maker_id" => Maker::inRandomOrder()->first()->id,
             "model_id" => function (array $attributes) {
-                return Model::where("maker_id", $attributes["maker_id"])->inRandomOrder()->first()->id;
+                return CarModel::where("maker_id", $attributes["maker_id"])->inRandomOrder()->first()->id;
             },
             "year" => fake()->year(),
             "price" => (int) fake()->randomFloat(2, 5, 100) * 100000,

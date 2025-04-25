@@ -1,17 +1,14 @@
 <?php
 
-namespace App\Models;
-
+use App\Models\Car;
+use App\Models\CarModel;
+use Database\Factories\MakerFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class FuelType extends Model
+class Maker extends Model
 {
-    // protected $table="car_fuel_types";
-    // protected $primaryKey="fuel_type_id";
-    // public $incrementing=false;
-    // protected $keyType = 'string';
 
     use HasFactory;
     public $timestamps = false;
@@ -24,5 +21,11 @@ class FuelType extends Model
     {
         return $this->hasMany(Car::class);
     }
+
+    public function carModel(): HasMany
+    {
+        return $this->hasMany(CarModel::class);
+    }
+
 
 }

@@ -22,7 +22,7 @@ return new class extends Migration {
             $table->timestamp("published_at")->nullable();
             $table->timestamp("deleted_at")->nullable();
             $table->foreignId('maker_id')->constrained('makers');
-            $table->foreignId('model_id')->constrained('models');
+            $table->foreignId('model_id')->constrained('car_models');
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId("car_type_id")->constrained("car_types");
             $table->foreignId("fuel_type_id")->constrained("fuel_types");
