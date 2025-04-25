@@ -2,11 +2,15 @@
 
 namespace App\Models;
 
+use Database\Factories\MakerFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Maker extends Model
 {
+
+    use HasFactory;
     public $timestamps = false;
 
     protected $fillable = [
