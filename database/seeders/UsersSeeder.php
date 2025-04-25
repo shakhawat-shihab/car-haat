@@ -8,19 +8,26 @@ use App\Models\CarModel;
 use App\Models\CarType;
 use App\Models\City;
 use App\Models\FuelType;
+use App\Models\Maker;
+use App\Models\Model;
 use App\Models\State;
 use App\Models\User;
-use App\Models\Maker;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-
-class DatabaseSeeder extends Seeder
+class UsersSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
+
+        // User::factory()->create([
+        //     'name' => 'Test User2',
+        //     'email' => 'test2@example.com',
+        // ]);
+
         CarType::factory()
             ->sequence(
                 ['name' => 'Sedan'],
@@ -59,13 +66,13 @@ class DatabaseSeeder extends Seeder
 
         foreach ($states as $stateName => $cities) {
             State::factory()
-                ->state(['name' => $stateName])
+                ->create(['name' => $stateName])
                 ->has(
                     City::factory()
                         ->count(count($cities))
                         ->sequence(...array_map(fn($city) => ['name' => $city], $cities))
-                )
-                ->create();
+                        ->create(),
+                );
         }
 
         //similar to state variable makers will be another variable assoicate array
@@ -102,21 +109,25 @@ class DatabaseSeeder extends Seeder
             ->has(
                 Car::factory()
                     ->count(50)
-                    ->has(
-                        CarImage::factory()
-                            ->count(5)
-                            ->sequence(
-                                fn($sequence) => [
-                                    'image_path' => 'https://example.com/car_image_' . $sequence->index + 1 . '.jpg',
-                                ]
-                            ),
-                        "images"
+                    ->has(CarImage::factory()
+                        ->count(5)
+                        ->sequence(
+                            fn($sequence) => [
+                                'url' => 'https://example.com/car_image_' . $sequence->index + 1 . '.jpg',
+                            ]
+                        ),"images"
                     )
                     ->hasFeatures(),
                 "favoriteCars"
 
             )
             ->create();
+
+
+
+
+
+
 
     }
 }

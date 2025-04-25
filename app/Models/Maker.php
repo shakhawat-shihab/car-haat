@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use Database\Factories\MakerFactory;
+use App\Models\Car;
+use App\Models\CarModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -22,9 +23,9 @@ class Maker extends Model
         return $this->hasMany(Car::class);
     }
 
-    public function models(): HasMany
+    public function carModel(): HasMany
     {
-        return $this->hasMany(Model::class);
+        return $this->hasMany(CarModel::class);
     }
 
 
