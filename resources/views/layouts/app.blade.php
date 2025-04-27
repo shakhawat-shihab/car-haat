@@ -5,8 +5,7 @@
     {{$slot}}
     <footer>
         @section('footerLinks')
-        <a href="#">Link1</a>
-        <a href="#">Link2</a>
+
         @show
     </footer>
 </x-base-layout>

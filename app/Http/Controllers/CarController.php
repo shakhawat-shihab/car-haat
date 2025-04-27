@@ -25,7 +25,10 @@ class CarController extends Controller
                 "maker",
                 "city"
             ])
-            ->get();
+            ->paginate(10);
+        // ->withPath("/users/cars")
+        // ->appends(['sort' => 'price'])
+        // fragment("description");
         return view('car.index', ['cars' => $cars]);
     }
 
@@ -102,8 +105,7 @@ class CarController extends Controller
         $carCount = $query->count();
 
         $cars = $query->paginate(9);
-
-        dump($cars);
+        // dump($cars);
 
         $carModels = CarModel::all();
         // dump($carModels);
@@ -122,7 +124,7 @@ class CarController extends Controller
                 "fuelType",
                 "maker",
                 "city"
-            ])->limit(10)->get();
+            ])->paginate(10);
 
         return view('car.watchlist', ["cars" => $favCars]);
     }
