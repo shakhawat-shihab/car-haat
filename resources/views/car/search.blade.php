@@ -23,9 +23,10 @@
                     </select>
                 </div>
                 <div class="search-car-results-wrapper">
+                    <!-- Search cars sidebar -->
                     <div class="search-cars-sidebar">
                         <div class="card card-found-cars">
-                            <p class="m-0">Found <strong>{{ $carCount }}</strong> cars</p>
+                            <p class="m-0">Found <strong>{{ $cars->total() }}</strong> cars</p>
 
                             <button class="close-filters-button">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -412,14 +413,20 @@
                         </section>
                         <!--/ Find a car form -->
                     </div>
+                    <!-- / Search cars sidebar -->
 
                     <!-- Search result -->
                     <div class="search-cars-results">
+                        <!-- car list show -->
                         <div class="car-items-listing">
                             @foreach ($cars as $car)
                                 <x-car-item :$car />
                             @endforeach
                         </div>
+                        <!-- / car list show -->
+
+                        {{$cars->links()}}
+                        <!-- pagination show -->
                         <nav class="pagination my-large">
                             <a href="#" class="pagination-item">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -455,8 +462,10 @@
                                 </svg>
                             </a>
                         </nav>
+                        <!-- / pagination show -->
                     </div>
                     <!-- / Search result -->
+
                 </div>
             </div>
         </section>

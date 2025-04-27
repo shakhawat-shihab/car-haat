@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use App\Models\CarModel;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CarController extends Controller
@@ -13,7 +14,19 @@ class CarController extends Controller
      */
     public function index()
     {
-        return view('car.index');
+        $cars = User::find(1)
+            ->cars()
+            ->with([
+                "primaryImage",
+                "images",
+                "features",
+                "carType",
+                "fuelType",
+                "maker",
+                "city"
+            ])
+            ->get();
+        return view('car.index', ['cars' => $cars]);
     }
 
     /**
@@ -37,20 +50,6 @@ class CarController extends Controller
      */
     public function show(Car $car)
     {
-        // $carDetails = Car::where("id", $car->id)
-        //     ->with([
-        //         "features",
-        //         "primaryImage",
-        //         "images",
-        //         "carType",
-        //         "fuelType",
-        //         "maker",
-        //         "model",
-        //         "city",
-        //         'user',
-        //         "favoriteUsers"
-        //     ])
-        //     ->first();
         return view('car.show', ["carDetails" => $car]);
     }
 
@@ -84,13 +83,47 @@ class CarController extends Controller
     public function search()
     {
         $query = Car::where("published_at", "<>", null)
+            ->with([
+                "primaryImage",
+                "images",
+                "features",
+                "carType",
+                "fuelType",
+                "maker",
+                "city"
+            ])
             ->orderBy("published_at", "desc");
+
+        // $query->join('cities', 'cars.city_id', '=', 'cities.id')
+        //     ->where('cities.state_id', 2);
+
+        // $query->select('cars.*', 'cities.name as city_name');
+
         $carCount = $query->count();
-        $cars = $query->limit(9)->get();
+
+        $cars = $query->paginate(9);
+
+        dump($cars);
 
         $carModels = CarModel::all();
         // dump($carModels);
 
         return view('car.search', ["cars" => $cars, "carCount" => $carCount, "carModels" => $carModels]);
+    }
+
+    public function watchList()
+    {
+        $favCars = User::find(4)->favoriteCars()
+            ->with([
+                "primaryImage",
+                "images",
+                "features",
+                "carType",
+                "fuelType",
+                "maker",
+                "city"
+            ])->limit(10)->get();
+
+        return view('car.watchlist', ["cars" => $favCars]);
     }
 }

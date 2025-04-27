@@ -95,6 +95,19 @@ class HomeController extends Controller
             ->limit(30)
             ->get();
 
+        $car = Car::where("published_at", "<>", null)
+            ->limit(30)
+            ->with([
+                "primaryImage",
+                "images",
+                "features",
+                "carType",
+                "fuelType",
+                "maker",
+                "city"
+            ])
+            ->get();
+
         return view('index', ["cars" => $car]);
     }
 }
