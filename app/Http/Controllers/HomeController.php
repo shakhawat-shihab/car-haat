@@ -91,6 +91,10 @@ class HomeController extends Controller
 
         // dump($result->favoriteCars);
 
-        return view('index');
+        $car = Car::where("published_at", "<>", null)
+            ->limit(30)
+            ->get();
+
+        return view('index', ["cars" => $car]);
     }
 }

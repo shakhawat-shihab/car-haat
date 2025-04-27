@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
+use App\Models\CarModel;
 use Illuminate\Http\Request;
 
 class CarController extends Controller
@@ -36,7 +37,21 @@ class CarController extends Controller
      */
     public function show(Car $car)
     {
-        return view('car.show');
+        // $carDetails = Car::where("id", $car->id)
+        //     ->with([
+        //         "features",
+        //         "primaryImage",
+        //         "images",
+        //         "carType",
+        //         "fuelType",
+        //         "maker",
+        //         "model",
+        //         "city",
+        //         'user',
+        //         "favoriteUsers"
+        //     ])
+        //     ->first();
+        return view('car.show', ["carDetails" => $car]);
     }
 
     /**
@@ -68,6 +83,14 @@ class CarController extends Controller
      */
     public function search()
     {
-        return view('car.search');
+        $query = Car::where("published_at", "<>", null)
+            ->orderBy("published_at", "desc");
+        $carCount = $query->count();
+        $cars = $query->limit(9)->get();
+
+        $carModels = CarModel::all();
+        // dump($carModels);
+
+        return view('car.search', ["cars" => $cars, "carCount" => $carCount, "carModels" => $carModels]);
     }
 }

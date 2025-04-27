@@ -49,14 +49,41 @@ class Car extends Model
         return $this->hasMany(CarImage::class, 'car_id', 'id');
     }
 
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(City::class, 'city_id', 'id');
+    }
+
+
     public function carType(): BelongsTo
     {
         return $this->belongsTo(CarType::class, 'car_type_id', 'id');
     }
 
+    public function fuelTYPE(): BelongsTo
+    {
+        return $this->belongsTo(FuelType::class, 'fuel_type_id', 'id');
+    }
 
-    public function favoriteUsers(): BelongsToMany{
+    public function maker(): BelongsTo
+    {
+        return $this->belongsTo(Maker::class, 'maker_id', 'id');
+    }
+
+    public function model(): BelongsTo
+    {
+        return $this->belongsTo(CarModel::class, 'model_id', 'id');
+    }
+
+
+    public function favoriteUsers(): BelongsToMany
+    {
         return $this->belongsToMany(User::class, "favourite_cars", "car_id", "user_id");
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
 
